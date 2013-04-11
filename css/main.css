@@ -1,12 +1,12 @@
-#canvas{
-	height: 400px;
-}
-
-.archItem{
-	margin: 5px 0;
-}
-
 tr.ours td{
 	background: #D1F1D1 !important;
 	font-weight: bold;
+}
+
+#players table tr td{
+	padding: 4px 8px;
+}
+
+#players table{
+	font-size: 75%;
 }

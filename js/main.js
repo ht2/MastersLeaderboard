@@ -51,12 +51,15 @@
 				this.$el.append( view );
 				
 			}, this);
+			
+			
 			$('#refresh').removeClass('btn-info').addClass('btn-danger');
 			var time = new Date();
 			$('#info').html('Refresh (last updated '+time.getUTCHours()+":"+time.getUTCMinutes()+")");
 			return this;
 		}
 	});
+	
 	
 	App.ourPlayers = [
 		'Justin Rose',
