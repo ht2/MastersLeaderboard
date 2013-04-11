@@ -64,9 +64,11 @@
 		defaults: {
                         id: 0,
 			name: "John Doe",
+                        country: 'UK',
 			place: "0",
 			score: "0",
 			through: "0",
+                        total:"",
 			ours: false
 		}
 	});
@@ -121,8 +123,8 @@
 			
 			$('#refresh').removeClass('btn-info').addClass('btn-danger');
 			var time = new Date();
-                        var hours = time.getUTCHours();
-                        var minutes = time.getUTCMinutes();
+                        var hours = time.getHours();
+                        var minutes = time.getMinutes();
                         if( minutes < 10 ){
                             minutes = "0" + minutes;
                         }
@@ -158,8 +160,10 @@
                             id: id,
                             place: player_split[1],
                             name: name,
+                            country: player_split[33],
                             score: player_split[4],
                             through: player_split[5],
+                            total: player_split[7],
                             ours: ours
                     });
                 }
