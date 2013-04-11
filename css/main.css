@@ -1,0 +1,12 @@
+#canvas{
+	height: 400px;
+}
+
+.archItem{
+	margin: 5px 0;
+}
+
+tr.ours td{
+	background: #D1F1D1 !important;
+	font-weight: bold;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="js/bootstrap.min.js">
+        <link rel="stylesheet" href="css/main.css">
+	</head>
+	<body>
+		<div class='container'>
+			<h1>2013 Masters Leaderboard</h1>
+			<div class='row'>
+				<div class='span12' style="text-align: right;">
+					<div class='btn btn-danger' id='refresh'><i class='icon icon-refresh icon-white'></i> <span id='info'>Refresh</span></div>
+				</div>
+			</div>
+			<hr>
+			<div id='players'>
+				<table width='100%' class='table table-striped'>
+					<thead>
+						<tr>
+							<th>Place</th>
+							<th>Player</th>
+							<th style='text-align:center;'>Through</th>
+							<th style='text-align:right;'>Current Score</th>
+						</tr>
+					</thead>
+					<tbody id='playersTableBody'></tbody>
+				</table>
+			</div>
+		</div>
+		
+		<script id='playerTemplate' type="text/template">
+			<td><%= place %></td>
+			<td><%= name %></td>
+			<td style='text-align:center;'><%= through %></td>
+			<td style='text-align:right;'><%= score %></td>
+		</script>
+		
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.0.min.js"><\/script>')</script>
+        <script src="js/libs/json2-20121008/json2.js"></script>
+        <script src="js/xml2json.js"></script>
+        <script src="js/libs/raphael-2.1.0/raphael-min.js"></script>
+        <script src="js/libs/underscore.js-1.4.3/underscore-min.js"></script>
+        <script src="js/libs/backbone.js-0.9.10/backbone-min.js"></script>
+        <script src="js/main.js"></script>
+	</body>
+</html>
