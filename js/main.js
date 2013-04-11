@@ -55,7 +55,6 @@
             var index = players.indexOf(id);
             if( index >= 0){
                 players.splice(index, 1);
-                console.log(players);
                 $.cookie('savedPlayers', players.join(',') );
             }
        }
