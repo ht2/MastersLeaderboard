@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title></title>
+		<title>2013 Master Leaderboard</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		
 		<link rel="stylesheet" href="css/bootstrap.min.css">
@@ -27,11 +27,15 @@
 							<th>Player</th>
 							<th style='text-align:center;'>Through</th>
 							<th style='text-align:right;'>Current Score</th>
+                                                        <th style='text-align:right;'>Saved</th>
 						</tr>
 					</thead>
-					<tbody id='playersTableBody'></tbody>
+                                        <tbody id='playersTableBody'></tbody>
 				</table>
 			</div>
+                        <hr>
+                        
+                        <p><small>All data pulled using the <a href='www.masters.com' target="_blank">masters.com</a> public API. Design and coding &copy; James Mullaney 2013</small></p>
 		</div>
 		
 		<script id='playerTemplate' type="text/template">
@@ -39,13 +43,19 @@
 			<td><%= name %></td>
 			<td style='text-align:center;'><%= through %></td>
 			<td style='text-align:right;'><%= score %></td>
+                        <td style='text-align:right;'><div class='star btn btn-success <% if(ours){ %>active<% } %>'><i class='icon-star icon-white'></i></div></td>
 		</script>
+                
+                <script id='loadingTR' type='text/template'>
+                    <tr><td style='text-align:center;' colspan='5'>Loading...</td></tr>
+                </script>
 		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.0.min.js"><\/script>')</script>
         <script src="js/libs/json2-20121008/json2.js"></script>
         <script src="js/libs/DataTables-1.9.4/media/js/jquery.dataTables.min.js"></script>
         <script src="js/xml2json.js"></script>
+        <script src="js/jquery.cookie.js"></script>
         <script src="js/libs/raphael-2.1.0/raphael-min.js"></script>
         <script src="js/libs/underscore.js-1.4.3/underscore-min.js"></script>
         <script src="js/libs/backbone.js-0.9.10/backbone-min.js"></script>
