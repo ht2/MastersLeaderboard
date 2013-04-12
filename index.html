@@ -41,11 +41,12 @@
 							<th>Player</th>
 							<th class='hidden-phone' style='text-align:center;'>Round Totals</th>
 							<th style='text-align:center;'>Through</th>
+							<th style='text-align:center;'>Today</th>
 							<th style='text-align:center;'>Score</th>
                             <th style='text-align:center;'>Saved</th>
 						</tr>
 					</thead>
-                                        <tbody id='playersTableBody'></tbody>
+                    <tbody id='playersTableBody'></tbody>
 				</table>
 			</div>
                         <hr>
@@ -58,6 +59,7 @@
 			<td><%= name %><span class='hidden-phone'> (<%= country %>)</span></td>
 			<td class='hidden-phone' style='text-align:center;'><%= round1 %>/<%= round2 %></td>
 			<td style='text-align:center;'><%= through %></td>
+			<td style='text-align:center;'><%= today %></td>
 			<td style='text-align:center;'><%= score %></td>
             <td style='text-align:center;'><div class='star btn btn-success btn-mini <% if(ours){ %>active<% } %>'><i class='icon-star icon-white'></i></div></td>
 		</script>
