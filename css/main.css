@@ -5,6 +5,7 @@ tr.ours td{
 
 #players table tr td{
 	padding: 4px 8px;
+	vertical-align: middle;
 }
 
 #players table{
