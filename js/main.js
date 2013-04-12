@@ -62,13 +62,16 @@
 	
 	App.Models.Player = Backbone.Model.extend({
 		defaults: {
-                        id: 0,
+            id: 0,
 			name: "John Doe",
-                        country: 'UK',
+            country: 'UK',
 			place: "0",
 			score: "0",
 			through: "0",
-                        total:"",
+			round1:"",
+            round2:"",
+            round3:"",
+            round4:"",
 			ours: false
 		}
 	});
@@ -129,21 +132,25 @@
                             minutes = "0" + minutes;
                         }
 			$('#info').html('Refresh (last updated '+hours+":"+minutes+")");
+			
+			var localTime = time.getTime();
+			var localOffset = time.getTimezoneOffset() * 60000;
+			var utc = localTime + localOffset;
+			var offset = -4;
+			var augusta = utc + (3600000*offset);
+			var augustaTime = new Date(augusta);
+			
+			var augustaHours = augustaTime.getHours();
+			var augustaMinutes = augustaTime.getMinutes();
+			if( augustaMinutes < 10 ){
+				augustaMinutes = "0" + augustaMinutes;
+			}
+			$('#augustaTime').html( augustaHours+":"+augustaMinutes );
+			
 			return this;
 		}
 	});
 	
-	
-	App.ourPlayers = [
-		'Justin Rose',
-		'Tiger Woods',
-		'Thorbjorn Olesen',
-		'Lee Westwood',
-		'Martin Kaymer',
-		'Freddie Jacobson',
-		'Brandt Snedeker'
-	];
-        
 	
         App.Helpers.drawPlayers = function(players){
             var players_data = [];
@@ -163,7 +170,10 @@
                             country: player_split[33],
                             score: player_split[4],
                             through: player_split[5],
-                            total: player_split[7],
+                            round1: player_split[7],
+                            round2: player_split[8],
+                            round3: player_split[9],
+                            round4: player_split[10],
                             ours: ours
                     });
                 }
@@ -188,10 +198,10 @@
 	
 	$('#refresh').click( function(){
 		App.Helpers.getScores();
-		App.Helpers.creatTimer();
+		App.Helpers.createTimer();
 	})
 	
-	App.Helpers.creatTimer = function(){
+	App.Helpers.createTimer = function(){
 		if( typeof App.timer != "undefined" ){
 			clearInterval(App.timer);
 			App.timer = null;
@@ -202,7 +212,7 @@
 		}, 30000 );
 	};
 	
-	App.Helpers.creatTimer();
+	App.Helpers.createTimer();
 	App.Helpers.getScores();
 	
 	

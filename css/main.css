@@ -10,3 +10,9 @@ tr.ours td{
 #players table{
 	font-size: 75%;
 }
+
+.fb-like,
+.twitter-share-button{
+	float: right;
+	margin-bottom: 15px;
+}
