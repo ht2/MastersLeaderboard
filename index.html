@@ -34,16 +34,19 @@
 			</div>
 			<br>
 			<div id='players'>
-				<table width='100%' class='table table-striped'>
+				<table width='100%' class='table table-striped table-hover table-condensed'>
 					<thead>
 						<tr>
 							<th style='text-align:center;'>Place</th>
 							<th>Player</th>
-							<th class='hidden-phone' style='text-align:center;'>Round Totals</th>
-							<th style='text-align:center;'>Through</th>
+							<th class='hidden-phone' style='text-align:center;'>R1</th>
+							<th class='hidden-phone' style='text-align:center;'>R2</th>
+							<th class='hidden-phone' style='text-align:center;'>R3</th>
+							<th class='hidden-phone' style='text-align:center;'>R4</th>
+							<th style='text-align:center;'>Thru</th>
 							<th style='text-align:center;'>Today</th>
 							<th style='text-align:center;'>Score</th>
-                            <th style='text-align:center;'>Saved</th>
+                            <th style='text-align:center;'>Save</th>
 						</tr>
 					</thead>
                     <tbody id='playersTableBody'></tbody>
@@ -57,7 +60,10 @@
 		<script id='playerTemplate' type="text/template">
 			<td style='text-align:center;'><%= place %></td>
 			<td><%= name %><span class='hidden-phone'> (<%= country %>)</span></td>
-			<td class='hidden-phone' style='text-align:center;'><%= round1 %>/<%= round2 %></td>
+			<td class='hidden-phone' style='text-align:center;'><%= round1 %></td>
+			<td class='hidden-phone' style='text-align:center;'><%= round2 %></td>
+			<td class='hidden-phone' style='text-align:center;'><%= round3 %></td>
+			<td class='hidden-phone' style='text-align:center;'><%= round4 %></td>
 			<td style='text-align:center;'><%= through %></td>
 			<td style='text-align:center;'><%= today %></td>
 			<td style='text-align:center;'><%= score %></td>
@@ -65,7 +71,7 @@
 		</script>
                 
                 <script id='loadingTR' type='text/template'>
-                    <tr><td style='text-align:center;' colspan='6'>Loading...</td></tr>
+                    <tr><td style='text-align:center;' colspan='12'>Loading...</td></tr>
                 </script>
 		<div id="fb-root"></div>
 		<div id="fb-root"></div>
