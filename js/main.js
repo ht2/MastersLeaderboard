@@ -20,13 +20,13 @@
 
             // Take the provided url, and add it to a YQL query. Make sure you 
 
-            //var yql = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from html where url="' + site + '"') + '&format=json&callback=?';
+            var yql = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from html where url="' + site + '"') + '&format=json&callback=?';
             //console.log(yql);
             // Request that YSQL string, and run a callback function.
             // Pass a defined function to prevent cache-busting.
             // 
             // 
-            $.getJSON( site, cbFunc ).error( function(e){
+            $.getJSON( yql, cbFunc ).error( function(e){
             	console.log("error");
             	console.log(e);
             });
@@ -158,50 +158,50 @@
 	});
 	
 	
-        App.Helpers.drawPlayers = function(players){
+  App.Helpers.drawPlayers = function(players_raw){
+  	
+  		var players = $.parseJSON(players_raw).data.player;
 
-            var players_data = [];
+      var players_data = [];
 
-            $.each( players, function(i, player_data){
-                if( i != 0 ) {
-                    //var player_split = player_data.split('|');
-                    var id = player_data.id;
-                    //var name = player_split[34];
-                    var our_player_index = App.Helpers.getSavedPlayers().indexOf( id );
-                    var ours = (our_player_index>=0);
-                    
-                    players_data.push({
-                            id: id,
-                            place: player_data.pos,
-                            name: player_data.name,
-                            country: player_data.country,
-                            score: player_data.topar,
-                            today: player_data.today,
-                            through: player_data.thru,
-                            round1: "",
-                            round2: "",
-                            round3: "",
-                            round4: "",
-                            ours: ours
-                    });
-                }
-            });
+      $.each( players, function(i, player_data){
+          //var player_split = player_data.split('|');
+          var id = player_data.id;
+          //var name = player_split[34];
+          var our_player_index = App.Helpers.getSavedPlayers().indexOf( id );
+          var ours = (our_player_index>=0);
+          
+          players_data.push({
+                  id: id,
+                  place: player_data.pos,
+                  name: player_data.name,
+                  country: player_data.country,
+                  score: player_data.topar,
+                  today: player_data.today,
+                  through: player_data.thru,
+                  round1: "",
+                  round2: "",
+                  round3: "",
+                  round4: "",
+                  ours: ours
+          });
+      });
 
-            var playersCollection = new App.Collections.Players( players_data );
-            var playersView = new App.Views.Players({ collection: playersCollection });
-        }
+      var playersCollection = new App.Collections.Players( players_data );
+      var playersView = new App.Views.Players({ collection: playersCollection });
+  }
         
 	App.Helpers.getScores = function(){
   	$('#info').html('Refreshing...')
 		$('#refresh').removeClass('btn-danger').addClass('btn-info');
                 
-    App.Helpers.requestCrossDomain( 'scores.php', function(data){
-        App.Helpers.drawPlayers(data.data.player);
+    App.Helpers.requestCrossDomain( 'http://www.ht2.co.uk/jm/scores.php', function(data){
+        App.Helpers.drawPlayers(data.query.results.body.p);
     });
 	}
         
 	
-        $('#playersTableBody').html( App.Helpers.template('loadingTR') );
+  $('#playersTableBody').html( App.Helpers.template('loadingTR') );
 	
 	$('#refresh').click( function(){
 		App.Helpers.getScores();
