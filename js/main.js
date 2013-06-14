@@ -27,8 +27,8 @@
             // 
             // 
             $.getJSON( yql, cbFunc ).error( function(e){
-            	console.log("error");
-            	console.log(e);
+            	//console.log("error");
+            	//console.log(e);
             });
 
             function cbFunc(data) {
@@ -161,7 +161,7 @@
   App.Helpers.drawPlayers = function(players_raw){
   	
   		var players = $.parseJSON(players_raw).data.player;
-  		console.log(players);
+
       var players_data = [];
 
       $.each( players, function(i, player_data){
