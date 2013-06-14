@@ -165,6 +165,8 @@
       var players_data = [];
 
       $.each( players, function(i, player_data){
+
+        console.log(player_data);
           //var player_split = player_data.split('|');
           var id = player_data.id;
           //var name = player_split[34];
@@ -181,6 +183,20 @@
           var r3 = (typeof r3_data[1] === "undefined") ? "" : r3_data[1];
           var r4 = (typeof r4_data[1] === "undefined") ? "" : r4_data[1];
 
+          var thru_data = player_data.thruHistory.split("|");
+
+          if( player_data.thru === "" && r1 === "" ){
+              r1 = (typeof thru_data[0] === "undefined" || thru_data[0]==="" ) ? "" : "<em>thru "+thru_data[0]+"</em>";
+          }
+          if( player_data.thru === "" && r2 === "" ){
+              r2 = (typeof thru_data[1] === "undefined" || thru_data[1]==="" ) ? "" : "<em>thru "+thru_data[1]+"</em>";
+          }
+          if( player_data.thru === "" && r3 === "" ){
+              r3 = (typeof thru_data[2] === "undefined" || thru_data[2]==="" ) ? "" : "<em>thru "+thru_data[2]+"</em>";
+          }
+          if( player_data.thru === "" && r4 === "" ){
+              r4 = (typeof thru_data[3] === "undefined" || thru_data[3]==="" ) ? "" : "<em>thru "+thru_data[3]+"</em>";
+          }
           
           players_data.push({
                   id: id,
