@@ -161,7 +161,7 @@
   App.Helpers.drawPlayers = function(players_raw){
   	
   		var players = $.parseJSON(players_raw).data.player;
-
+  		console.log(players);
       var players_data = [];
 
       $.each( players, function(i, player_data){
@@ -170,6 +170,17 @@
           //var name = player_split[34];
           var our_player_index = App.Helpers.getSavedPlayers().indexOf( id );
           var ours = (our_player_index>=0);
+
+          var r1_data = player_data.r1.split("|");
+          var r2_data = player_data.r2.split("|");
+          var r3_data = player_data.r3.split("|");
+          var r4_data = player_data.r4.split("|");
+
+          var r1 = (typeof r1_data[1] === "undefined") ? "" : r1_data[1];
+          var r2 = (typeof r2_data[1] === "undefined") ? "" : r2_data[1];
+          var r3 = (typeof r3_data[1] === "undefined") ? "" : r3_data[1];
+          var r4 = (typeof r4_data[1] === "undefined") ? "" : r4_data[1];
+
           
           players_data.push({
                   id: id,
@@ -179,10 +190,10 @@
                   score: player_data.topar,
                   today: player_data.today,
                   through: player_data.thru,
-                  round1: "",
-                  round2: "",
-                  round3: "",
-                  round4: "",
+                  round1: r1,
+                  round2: r2,
+                  round3: r3,
+                  round4: r4,
                   ours: ours
           });
       });
