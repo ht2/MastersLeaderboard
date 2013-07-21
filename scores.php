@@ -1,5 +1,5 @@
 <?php
-	$url = 'http://www.usopen.com/en_US/xml/gen/scores/scores.low.json';
+	$url = 'http://www.theopen.com/Feeds/TheOpen/Scoring/TraditionalViewFeed.aspx';
 	
     $ch = curl_init();    // initialize curl handle
 	curl_setopt($ch, CURLOPT_URL,$url); // set url to post to

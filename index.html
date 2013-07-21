@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>2013 US Open Leaderboard</title>
+		<title>2013 - The Open Leaderboard</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta property="fb:admins" content="501458437" />
@@ -14,7 +14,7 @@
 		<div class='container'>
 			<div class='row'>
 				<div class='span6'>
-					<h3>US Open Leaderboard</h3>
+					<h3>The Open Leaderboard</h3>
 				</div>
 				<div class='span6' style='text-align:right;'>
 					<div style='margin-top: 10px;'>
@@ -26,7 +26,7 @@
 			</div>
 			<div class='row'>	
 				<div class='span6 hidden-phone'>
-					<p>Ardmore, PA, USA (EDT): <span id='augustaTime'>----</span></p>
+					<p>Muirfield, Scotland (BST): <span id='augustaTime'>----</span></p>
 				</div>	
 				<div class='span6' style="text-align: right;">
 					<div class='btn btn-danger' id='refresh' style='margin-bottom: 5px;'><i class='icon icon-refresh icon-white'></i> <span id='info'>Refresh</span></div>
@@ -38,6 +38,7 @@
 					<thead>
 						<tr>
 							<th style='text-align:center;'>Place</th>
+              <th class='hidden-phone' style='text-align:center;'>Country</th>
 							<th>Player</th>
 							<th class='hidden-phone' style='text-align:center;'>R1</th>
 							<th class='hidden-phone' style='text-align:center;'>R2</th>
@@ -59,7 +60,8 @@
 		
 		<script id='playerTemplate' type="text/template">
 			<td style='text-align:center;'><%= place %></td>
-			<td><%= name %><span class='hidden-phone'> (<%= country %>)</span></td>
+      <td class='hidden-phone' style='text-align:center;'><img src='<%= flag %>' height='15' alt='<%= country %>' title='<%= country %>'/></td>
+      <td><%= name %></td>
 			<td class='hidden-phone' style='text-align:center;'><%= round1 %></td>
 			<td class='hidden-phone' style='text-align:center;'><%= round2 %></td>
 			<td class='hidden-phone' style='text-align:center;'><%= round3 %></td>
