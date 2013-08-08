@@ -12,24 +12,24 @@
 	</head>
 	<body>
 		<div class='container'>
-			<div class='row'>
+			<div class='row' style='margin-top: 10px;'>
 				<div class='span6'>
-					<h3>US Open Leaderboard</h3>
+					<h3 style='margin-top: 0;'>US PGA Championship</h3>
 				</div>
 				<div class='span6' style='text-align:right;'>
+					<div class='btn btn-danger' id='refresh' style='margin: 5px 0;'><i class='icon icon-refresh icon-white'></i> <span id='info'>Refresh</span></div>
+				</div>
+			</div>
+			<div class='row hidden-phone'>	
+				<div class='span6'>
+					<p>Oak Hill Country Club, New York, USA (EDT): <span id='augustaTime'>----</span></p>
+				</div>	
+				<div class='span6' style="text-align: right;">
 					<div style='margin-top: 10px;'>
 						<div class="fb-like" data-send="true" data-layout="button_count" data-width="450" data-show-faces="false"></div>
 						<a href="https://twitter.com/share" class="twitter-share-button" data-via="jMullaney">Tweet</a>
 						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 					</div>
-				</div>
-			</div>
-			<div class='row'>	
-				<div class='span6 hidden-phone'>
-					<p>Ardmore, PA, USA (EDT): <span id='augustaTime'>----</span></p>
-				</div>	
-				<div class='span6' style="text-align: right;">
-					<div class='btn btn-danger' id='refresh' style='margin-bottom: 5px;'><i class='icon icon-refresh icon-white'></i> <span id='info'>Refresh</span></div>
 				</div>
 			</div>
 			<br>
@@ -54,7 +54,7 @@
 			</div>
                         <hr>
                         
-                        <p><small>All data pulled using the <a href='http://www.usopen.com' target="_blank">usopen.com</a> public API. Design and coding &copy; James Mullaney 2013</small></p>
+                        <p><small>All data pulled using the <a href='http://www.majorschampionships.com' target="_blank">majorschampionships.com</a> public API. Design and coding &copy; James Mullaney 2013</small></p>
 		</div>
 		
 		<script id='playerTemplate' type="text/template">

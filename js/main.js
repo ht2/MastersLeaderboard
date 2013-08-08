@@ -159,53 +159,68 @@
 	
 	
   App.Helpers.drawPlayers = function(players_raw){
-  	
-  		var players = $.parseJSON(players_raw).data.player;
+
+  	  var data = $.parseJSON(players_raw);
+  		var players = data.lb.pds.p;
+
 
       var players_data = [];
 
       $.each( players, function(i, player_data){
 
-        console.log(player_data);
           //var player_split = player_data.split('|');
           var id = player_data.id;
           //var name = player_split[34];
           var our_player_index = App.Helpers.getSavedPlayers().indexOf( id );
           var ours = (our_player_index>=0);
 
-          var r1_data = player_data.r1.split("|");
-          var r2_data = player_data.r2.split("|");
-          var r3_data = player_data.r3.split("|");
-          var r4_data = player_data.r4.split("|");
+          var r1_data = player_data.rs.r[0];
+          var r2_data = player_data.rs.r[1];
+          var r3_data = player_data.rs.r[2];
+          var r4_data = player_data.rs.r[3];
 
-          var r1 = (typeof r1_data[1] === "undefined") ? "" : r1_data[1];
-          var r2 = (typeof r2_data[1] === "undefined") ? "" : r2_data[1];
-          var r3 = (typeof r3_data[1] === "undefined") ? "" : r3_data[1];
-          var r4 = (typeof r4_data[1] === "undefined") ? "" : r4_data[1];
+          var r1, r2, r3, r4;
 
-          var thru_data = player_data.thruHistory.split("|");
+          if( player_data.rn >= 1 ){
+            if( player_data.crs == "--" && data.lb.rn == "1" ){
+              r1 = r1_data.t;
+            } else {
+              r1 = r1_data.sc;
+            }
+          }
+          if( player_data.rn >= 2 ){
+            if( player_data.crs == "--" && data.lb.rn == "2" ){
+              r2 = r2_data.t;
+            } else {
+              r2 = r2_data.sc;
+            }
+          }
+          if( player_data.rn >= 3 ){
+            if( player_data.crs == "--" && data.lb.rn == "3" ){
+              r3 = r3_data.t;
+            } else {
+              r3 = r3_data.sc;
+            }
+          }
+          if( player_data.rn >= 4 ){
+            if( player_data.crs == "--" && data.lb.rn == "4" ){
+              r4 = r4_data.t;
+            } else {
+              r4 = r4_data.sc;
+            }
+          }
 
-          if( player_data.thru === "" && r1 === "" ){
-              r1 = (typeof thru_data[0] === "undefined" || thru_data[0]==="" ) ? "" : "<em>thru "+thru_data[0]+"</em>";
-          }
-          if( player_data.thru === "" && r2 === "" ){
-              r2 = (typeof thru_data[1] === "undefined" || thru_data[1]==="" ) ? "" : "<em>thru "+thru_data[1]+"</em>";
-          }
-          if( player_data.thru === "" && r3 === "" ){
-              r3 = (typeof thru_data[2] === "undefined" || thru_data[2]==="" ) ? "" : "<em>thru "+thru_data[2]+"</em>";
-          }
-          if( player_data.thru === "" && r4 === "" ){
-              r4 = (typeof thru_data[3] === "undefined" || thru_data[3]==="" ) ? "" : "<em>thru "+thru_data[3]+"</em>";
-          }
+
+
           
           players_data.push({
                   id: id,
-                  place: player_data.pos,
-                  name: player_data.name,
-                  country: player_data.country,
-                  score: player_data.topar,
-                  today: player_data.today,
-                  through: player_data.thru,
+                  place: player_data.p,
+                  name: player_data.fn + ' ' + player_data.ln,
+                  country: player_data.f,
+                  score: player_data.crs,
+                  today: player_data.tp,
+                  through: player_data.t,
                   round1: r1,
                   round2: r2,
                   round3: r3,
@@ -222,7 +237,7 @@
   	$('#info').html('Refreshing...')
 		$('#refresh').removeClass('btn-danger').addClass('btn-info');
                 
-    App.Helpers.requestCrossDomain( 'http://www.ht2.co.uk/jm/scores.php', function(data){
+    App.Helpers.requestCrossDomain( 'http://www.majorschampionships.com/data/r/033/leaderboard.json', function(data){
         App.Helpers.drawPlayers(data.query.results.body.p);
     });
 	}
