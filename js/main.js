@@ -20,15 +20,15 @@
 
             // Take the provided url, and add it to a YQL query. Make sure you 
 
-            var yql = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from html where url="' + site + '"') + '&format=json&callback=?';
+            //var yql = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from html where url="' + site + '"') + '&format=json&callback=?';
             //console.log(yql);
             // Request that YSQL string, and run a callback function.
             // Pass a defined function to prevent cache-busting.
             // 
             // 
-            $.getJSON( yql, cbFunc ).error( function(e){
-            	//console.log("error");
-            	//console.log(e);
+            $.getJSON( site, cbFunc ).error( function(e){
+            	console.log("error");
+            	console.log(e);
             });
 
             function cbFunc(data) {
@@ -160,8 +160,11 @@
 	
   App.Helpers.drawPlayers = function(players_raw){
 
-  	  var data = $.parseJSON(players_raw);
-  		var players = data.lb.pds.p;
+  	  //var data = $.parseJSON(players_raw);
+
+      console.log(players_raw);
+      var data = players_raw.lb;
+  		var players = data.p;
 
 
       var players_data = [];
@@ -174,53 +177,28 @@
           var our_player_index = App.Helpers.getSavedPlayers().indexOf( id );
           var ours = (our_player_index>=0);
 
-          var r1_data = player_data.rs.r[0];
-          var r2_data = player_data.rs.r[1];
-          var r3_data = player_data.rs.r[2];
-          var r4_data = player_data.rs.r[3];
+          var r1_data = player_data.rnd[0];
+          var r2_data = player_data.rnd[1];
+          var r3_data = player_data.rnd[2];
+          var r4_data = player_data.rnd[3];
 
           var r1, r2, r3, r4;
 
-          if( player_data.rn >= 1 ){
-            if( player_data.crs == "--" && data.lb.rn == "1" ){
-              r1 = r1_data.t;
-            } else {
-              r1 = r1_data.sc;
-            }
-          }
-          if( player_data.rn >= 2 ){
-            if( player_data.crs == "--" && data.lb.rn == "2" ){
-              r2 = r2_data.t;
-            } else {
-              r2 = r2_data.sc;
-            }
-          }
-          if( player_data.rn >= 3 ){
-            if( player_data.crs == "--" && data.lb.rn == "3" ){
-              r3 = r3_data.t;
-            } else {
-              r3 = r3_data.sc;
-            }
-          }
-          if( player_data.rn >= 4 ){
-            if( player_data.crs == "--" && data.lb.rn == "4" ){
-              r4 = r4_data.t;
-            } else {
-              r4 = r4_data.sc;
-            }
-          }
-
+          r1 = r1_data.str;
+          r2 = r2_data.str;
+          r3 = r3_data.str;
+          r4 = r4_data.str;
 
 
           
           players_data.push({
-                  id: id,
-                  place: player_data.p,
+                  id: pid,
+                  place: player_data.cp,
                   name: player_data.fn + ' ' + player_data.ln,
-                  country: player_data.f,
-                  score: player_data.crs,
-                  today: player_data.tp,
-                  through: player_data.t,
+                  country: player_data.cnt,
+                  score: player_data.cpr,
+                  today: player_data.tpr,
+                  through: player_data.th,
                   round1: r1,
                   round2: r2,
                   round3: r3,
@@ -236,9 +214,10 @@
 	App.Helpers.getScores = function(){
   	$('#info').html('Refreshing...')
 		$('#refresh').removeClass('btn-danger').addClass('btn-info');
-                
-    App.Helpers.requestCrossDomain( 'http://www.majorschampionships.com/data/r/033/leaderboard.json', function(data){
-        App.Helpers.drawPlayers(data.query.results.body.p);
+    
+
+    App.Helpers.requestCrossDomain( 'http://data.pga.com/jsonp/event/pgachampionship/2013/leaderboard/json/leaderboard.json?callback=?', function(data){
+        App.Helpers.drawPlayers(data);
     });
 	}
         
@@ -248,7 +227,7 @@
 	$('#refresh').click( function(){
 		App.Helpers.getScores();
 		App.Helpers.createTimer();
-	})
+	});
 	
 	App.Helpers.createTimer = function(){
 		if( typeof App.timer != "undefined" ){
