@@ -27,8 +27,8 @@
             // 
             // 
             $.getJSON( site, cbFunc ).error( function(e){
-            	console.log("error");
-            	console.log(e);
+            	//console.log("error");
+            	//console.log(e);
             });
 
             function cbFunc(data) {
@@ -160,9 +160,6 @@
 	
   App.Helpers.drawPlayers = function(players_raw){
 
-  	  //var data = $.parseJSON(players_raw);
-
-      console.log(players_raw);
       var data = players_raw.lb;
   		var players = data.p;
 
