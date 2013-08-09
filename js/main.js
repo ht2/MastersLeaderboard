@@ -27,8 +27,8 @@
             // 
             // 
             $.getJSON( site, cbFunc ).error( function(e){
-            	console.log("error");
-            	console.log(e);
+            	//console.log("error");
+            	//console.log(e);
             });
 
             function cbFunc(data) {
@@ -160,9 +160,6 @@
 	
   App.Helpers.drawPlayers = function(players_raw){
 
-  	  //var data = $.parseJSON(players_raw);
-
-      console.log(players_raw);
       var data = players_raw.lb;
   		var players = data.p;
 
@@ -172,7 +169,7 @@
       $.each( players, function(i, player_data){
 
           //var player_split = player_data.split('|');
-          var id = player_data.id;
+          var id = player_data.pid;
           //var name = player_split[34];
           var our_player_index = App.Helpers.getSavedPlayers().indexOf( id );
           var ours = (our_player_index>=0);
@@ -192,7 +189,7 @@
 
           
           players_data.push({
-                  id: pid,
+                  id: id,
                   place: player_data.cp,
                   name: player_data.fn + ' ' + player_data.ln,
                   country: player_data.cnt,
