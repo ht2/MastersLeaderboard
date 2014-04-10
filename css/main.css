@@ -17,3 +17,22 @@ tr.ours td{
 	float: right;
 	margin-bottom: 15px;
 }
+
+#header{
+	margin-top: 10px;
+}
+
+#header-title{
+	float: left;
+	width: 60%;
+}
+
+#header-title h3{
+	margin-top: 0;
+	line-height: normal;
+}
+
+#header-actions{
+	float: right;
+	width: 40%;
+}

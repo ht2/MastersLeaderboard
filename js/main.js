@@ -10,54 +10,54 @@
 		return _.template( $('#' + id).html() );
 	};
         
-        App.Helpers.requestCrossDomain = function( site, callback ) {
+	  App.Helpers.requestCrossDomain = function( site, callback ) {
 
-            // If no url was passed, exit.
-            if ( !site ) {
-                alert('No site was passed.');
-                return false;
-            }
+	      // If no url was passed, exit.
+	      if ( !site ) {
+	          alert('No site was passed.');
+	          return false;
+	      }
 
-            // Take the provided url, and add it to a YQL query. Make sure you 
+	      // Take the provided url, and add it to a YQL query. Make sure you 
 
-            var yql = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from html where url="' + site + '"') + '&format=json&callback=?';
+	      var yql = 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent('select * from html where url="' + site + '"') + '&format=json&callback=?';
 
-            // Request that YSQL string, and run a callback function.
-            // Pass a defined function to prevent cache-busting.
-            $.getJSON( yql, cbFunc );
+	      // Request that YSQL string, and run a callback function.
+	      // Pass a defined function to prevent cache-busting.
+	      $.getJSON( yql, cbFunc );
 
-            function cbFunc(data) {
-                callback(data);
-            }
-        }
-        
-        App.Helpers.getSavedPlayers = function(){
-            var str = $.cookie('savedPlayers');
-            
-            if( typeof str != 'undefined' ){
-                return str.split(',');
-            } else {
-                return [];
-            }
-        }
-        
-       App.Helpers.addSavedPlayer = function( id ){
-            var players = App.Helpers.getSavedPlayers();
-            
-            if( players.indexOf(id) < 0){
-                players.push(id);
-                $.cookie('savedPlayers', players.join(',') );
-            }
-       }
-        
-       App.Helpers.removeSavedPlayer = function( id ){
-            var players = App.Helpers.getSavedPlayers();
-            var index = players.indexOf(id);
-            if( index >= 0){
-                players.splice(index, 1);
-                $.cookie('savedPlayers', players.join(',') );
-            }
-       }
+	      function cbFunc(data) {
+	          callback(data);
+	      }
+	  }
+	  
+	  App.Helpers.getSavedPlayers = function(){
+	      var str = $.cookie('savedPlayers');
+	      
+	      if( typeof str != 'undefined' ){
+	          return str.split(',');
+	      } else {
+	          return [];
+	      }
+	  }
+	  
+	 App.Helpers.addSavedPlayer = function( id ){
+	      var players = App.Helpers.getSavedPlayers();
+	      
+	      if( players.indexOf(id) < 0){
+	          players.push(id);
+	          $.cookie('savedPlayers', players.join(',') );
+	      }
+	 }
+	  
+	 App.Helpers.removeSavedPlayer = function( id ){
+	      var players = App.Helpers.getSavedPlayers();
+	      var index = players.indexOf(id);
+	      if( index >= 0){
+	          players.splice(index, 1);
+	          $.cookie('savedPlayers', players.join(',') );
+	      }
+	 }
         
 	
 	App.Models.Player = Backbone.Model.extend({
@@ -70,9 +70,9 @@
 			today: "0",
 			through: "0",
 			round1:"",
-            round2:"",
-            round3:"",
-            round4:"",
+      round2:"",
+      round3:"",
+      round4:"",
 			ours: false
 		}
 	});
@@ -132,7 +132,7 @@
                         if( minutes < 10 ){
                             minutes = "0" + minutes;
                         }
-			$('#info').html('Refresh (last updated '+hours+":"+minutes+")");
+			$('#info').html('Refresh <span class="hidden-phone">(updated '+hours+":"+minutes+")</span>");
 			
 			var localTime = time.getTime();
 			var localOffset = time.getTimezoneOffset() * 60000;
@@ -153,50 +153,49 @@
 	});
 	
 	
-        App.Helpers.drawPlayers = function(players){
-            var players_data = [];
+  App.Helpers.drawPlayers = function(players){
+      var players_data = [];
 
-            $.each( players, function(i, player_data){
-                if( i != 0 ) {
-                    var player_split = player_data.split('|');
-                    var id = player_split[2];
-                    var name = player_split[34];
-                    var our_player_index = App.Helpers.getSavedPlayers().indexOf( id );
-                    var ours = (our_player_index>=0);
-                    
-                    players_data.push( {
-                            id: id,
-                            place: player_split[1],
-                            name: name,
-                            country: player_split[33],
-                            score: player_split[6],
-                            today: player_split[4],
-                            through: player_split[5],
-                            round1: player_split[7],
-                            round2: player_split[8],
-                            round3: player_split[9],
-                            round4: player_split[10],
-                            ours: ours
-                    });
-                }
-            });
+      $.each( players, function(i, player_data){
+          if( i != 0 ) {
+              var player_split = player_data.split('|');
+              var id = player_split[2];
+              var name = player_split[34];
+              var our_player_index = App.Helpers.getSavedPlayers().indexOf( id );
+              var ours = (our_player_index>=0);
+              
+              players_data.push( {
+                id: id,
+                place: player_split[1],
+                name: name,
+                country: player_split[33],
+                score: player_split[6],
+                today: player_split[4],
+                through: player_split[5],
+                round1: player_split[7],
+                round2: player_split[8],
+                round3: player_split[9],
+                round4: player_split[10],
+                ours: ours
+              });
+          }
+      });
 
-            var playersCollection = new App.Collections.Players( players_data );
-            var playersView = new App.Views.Players({ collection: playersCollection });
-        }
+      var playersCollection = new App.Collections.Players( players_data );
+      var playersView = new App.Views.Players({ collection: playersCollection });
+  }
         
 	App.Helpers.getScores = function(){
-                $('#info').html('Refreshing...')
+    $('#info').html('')
 		$('#refresh').removeClass('btn-danger').addClass('btn-info');
                 
-                App.Helpers.requestCrossDomain( 'http://www.masters.com/en_US/xml/gen/scores/scores.flash.xml', function(data){
-                    
-                    App.Helpers.drawPlayers(data.query.results.body.p);
-                });
+    App.Helpers.requestCrossDomain( 'http://www.masters.com/en_US/xml/gen/scores/scores.flash.xml', function(data){
+      App.Helpers.drawPlayers(data.query.results.body.p);
+    });
 	}
         
 	
-        $('#playersTableBody').html( App.Helpers.template('loadingTR') );
+ 	$('#playersTableBody').html( App.Helpers.template('loadingTR') );
 	
 	$('#refresh').click( function(){
 		App.Helpers.getScores();
