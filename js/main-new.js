@@ -287,7 +287,7 @@
       $.each( players, function(i, player){
 
               var id = "id-" + player.id;
-              var name = player.last_name +', '+player.first_name;
+              var name = player.display_name +', '+player.first_name;
               var our_player_index = App.Helpers.getSavedPlayers().indexOf( id );
               var ours = (our_player_index>=0);
               
@@ -301,7 +301,7 @@
                 id: id,
                 place: player.pos,
                 name: name,
-                country: player.countryCode,
+                country: player.country,
                 score: player.topar,
                 today: player.today,
                 through: (player.active == "1" || player.thru == "F") ? player.thru : player.teetime,
