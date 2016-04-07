@@ -36,3 +36,41 @@ tr.ours td{
 	float: right;
 	width: 40%;
 }
+
+tr.hole-number td{
+	font-weight: bold;
+}
+
+.table td{
+	text-align: center;
+}
+
+tr.par td{
+	font-size: 80%;
+}
+
+.hole-scores td div{
+	display: inline-block;
+	width: 25px;
+	line-height: 25px;
+	text-align: center;
+	background-color: #cfe9ff;
+	border-radius: 5px;
+	border: 1px solid #fff;
+	font-weight: bold;
+	font-size: 84%;
+}
+
+.hole-scores td .under,
+.hole-scores td .over{
+	color: #FFFFFF;
+	border: 1px solid #000;
+}
+.hole-scores td .under{
+	border-radius: 25px;
+	background-color: #009900;
+}
+.hole-scores td .over{
+	border-radius: 0px;
+	background-color: #990000;
+}
